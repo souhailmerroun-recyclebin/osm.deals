@@ -1,0 +1,2838 @@
+<table class="table table-sticky thSortable" data-bind="foreach: getPlayers">
+    <thead>
+        <tr class="thead">
+            <!-- ko with: players -->
+            <th class="text-left"
+                data-bind="text: $parents[2].getTranslatedPosition($parent.position), click: orderPlayersByName">Player
+            </th>
+            <th class="text-left hidden-xs" data-bind="click: orderPlayersByAge">Age</th>
+            <!-- ko if: !$parents[1].sortTransferPlayersByLine() -->
+            <th data-bind="click: orderPlayersByPosition">Position</th>
+            <!-- /ko -->
+            <th class="text-left hidden-xs" data-bind="click: orderPlayersByTeam">Club</th>
+            <th class="text-left hidden-xs" data-bind="click: orderPlayersByAttack">Att</th>
+            <th class="text-left hidden-xs" data-bind="click: orderPlayersByDefence">Def</th>
+            <th class="text-left hidden-xs" data-bind="click: orderPlayersByOvr">Ovr</th>
+            <th class="text-left visible-xs" data-bind="click: orderPlayersByMain">Qua</th>
+            <th class="text-right" data-bind="click: orderPlayersByPrice">Price</th>
+            <!-- /ko -->
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: players.getItems()">
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-pt"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Portuguese"></span><span class="semi-bold" data-bind="text: name">Cristiano Ronaldo</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">35</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->Fwd
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Juventus</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">98</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">32</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">65</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">98</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">40.7M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-gb"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="English"></span><span class="semi-bold" data-bind="text: name">Kane</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">26</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->Fwd
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Tottenham Hotspur</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">91</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">15</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">53</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">91</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">26.5M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-be"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Belgian"></span><span class="semi-bold" data-bind="text: name">De Bruyne</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">29</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->Mid
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Manchester City</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">93</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">90</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">91</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">91</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">25.4M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-fr"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="French"></span><span class="semi-bold" data-bind="text: name">Kanté</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">29</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->Mid
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Chelsea</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">89</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">89</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">89</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">89</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">23.1M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-gb"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="English"></span><span class="semi-bold" data-bind="text: name">Rashford</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">22</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->Fwd
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Manchester United</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">85</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">6</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">45</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">85</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">20.3M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-br"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Brazilian"></span><span class="semi-bold" data-bind="text: name">Alisson</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">27</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->GK
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Liverpool</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">0</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">91</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">45</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">91</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">18.5M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-am"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Armenian"></span><span class="semi-bold" data-bind="text: name">Mkhitaryan</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">31</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->Mid
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Roma</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">85</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">81</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">83</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">83</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">14.3M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-fr"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="French"></span><span class="semi-bold" data-bind="text: name">Giroud</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">33</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->Fwd
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Chelsea</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">83</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">15</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">49</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">83</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">13.3M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-es"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Spanish"></span><span class="semi-bold" data-bind="text: name">Callejón</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">33</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->Fwd
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Napoli</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">80</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">34</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">57</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">80</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">12.1M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-es"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Spanish"></span><span class="semi-bold" data-bind="text: name">Illarramendi</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">30</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->Mid
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam --> <a class="semi-bold ellipsis"
+                            data-bind="text: name, click: navigateTo, clickBubble: false">Real Sociedad</a>
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam -->
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">78</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">82</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">80</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">80</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">12.1M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-tr"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Turkish"></span><span class="semi-bold" data-bind="text: name">Calhanoglu</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">26</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->Fwd
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">AC Milan</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">78</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">28</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">53</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">78</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">11.3M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-br"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Brazilian"></span><span class="semi-bold" data-bind="text: name">Marquinhos</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">26</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->Def
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Paris Saint-Germain</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">5</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">84</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">44</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">84</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">11.1M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-fr"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="French"></span><span class="semi-bold" data-bind="text: name">Bakayoko</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">25</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->Mid
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Monaco</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">77</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">83</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">80</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">80</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">10.9M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-it"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Italian"></span><span class="semi-bold" data-bind="text: name">Lazzari</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">26</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->Mid
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Lazio</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">82</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">74</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">78</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">78</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">10.2M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-gb"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="English"></span><span class="semi-bold" data-bind="text: name">Ings</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">28</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->Fwd
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Southampton</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">79</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">14</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">46</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">79</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">10.1M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row highlight no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-es"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Spanish"></span><span class="semi-bold" data-bind="text: name">Capa</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">28</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->Def
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam --> <a class="semi-bold ellipsis"
+                            data-bind="text: name, click: navigateTo, clickBubble: false">Athletic Bilbao</a>
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam -->
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">34</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">74</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">54</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">74</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">9.9M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row highlight no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-es"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Spanish"></span><span class="semi-bold" data-bind="text: name">García D.</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">30</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->Mid
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam --> <a class="semi-bold ellipsis"
+                            data-bind="text: name, click: navigateTo, clickBubble: false">Athletic Bilbao</a>
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam -->
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">74</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">72</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">73</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">73</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">9.6M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-uy"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Uruguayan"></span><span class="semi-bold" data-bind="text: name">Muslera</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">34</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->GK
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Galatasaray</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">0</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">85</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">42</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">85</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">9.5M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-hr"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Croatian"></span><span class="semi-bold" data-bind="text: name">Vida</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">31</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->Def
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Besiktas</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">8</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">82</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">45</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">82</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">9.0M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-pl"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Polish"></span><span class="semi-bold" data-bind="text: name">Linetty</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">25</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->Mid
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Sampdoria</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">77</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">75</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">76</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">76</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">7.9M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-fr"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="French"></span><span class="semi-bold" data-bind="text: name">Kurzawa</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">27</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->Def
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Paris Saint-Germain</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">26</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">78</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">52</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">78</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">7.7M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-uy"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Uruguayan"></span><span class="semi-bold" data-bind="text: name">Pereyra</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">30</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->Mid
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Orlando City</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">79</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">75</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">77</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">77</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">7.7M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-gb"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="English"></span><span class="semi-bold" data-bind="text: name">Bertrand</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">30</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->Def
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Southampton</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">28</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">79</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">53</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">79</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">7.6M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row highlight no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-es"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Spanish"></span><span class="semi-bold" data-bind="text: name">López U.</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">24</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->Mid
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam --> <a class="semi-bold ellipsis"
+                            data-bind="text: name, click: navigateTo, clickBubble: false">Athletic Bilbao</a>
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam -->
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">71</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">69</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">70</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">70</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">7.4M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-jp"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Japanese"></span><span class="semi-bold" data-bind="text: name">Okazaki</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">34</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->Fwd
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Huesca</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">75</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">18</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">46</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">75</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">7.2M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-tn"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Tunisian"></span><span class="semi-bold" data-bind="text: name">Sliti</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">27</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->Fwd
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Al-Ettifaq</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">73</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">37</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">55</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">73</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">7.2M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-it"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Italian"></span><span class="semi-bold" data-bind="text: name">De Sciglio</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">27</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->Def
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Juventus</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">26</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">76</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">51</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">76</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">6.6M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-al"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Albanian"></span><span class="semi-bold" data-bind="text: name">Strakosha</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">25</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->GK
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Lazio</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">0</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">79</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">39</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">79</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">6.4M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-is"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Icelandic"></span><span class="semi-bold" data-bind="text: name">Sigurdsson</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">21</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->Mid
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">CSKA Moscow</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">76</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">73</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">74</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">74</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">6.3M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-dz"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Algerian"></span><span class="semi-bold" data-bind="text: name">Fares</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">24</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->Mid
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">SPAL</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">76</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">70</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">73</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">73</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">6.3M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-be"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Belgian"></span><span class="semi-bold" data-bind="text: name">Mignolet</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">32</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->GK
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Club Brugge</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">0</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">80</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">40</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">80</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">6.0M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-ar"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Argentine"></span><span class="semi-bold" data-bind="text: name">Pérez</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">20</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->Def
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Famalicão</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">15</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">74</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">44</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">74</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">5.1M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-si"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Slovene"></span><span class="semi-bold" data-bind="text: name">Handanovic</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">36</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->GK
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Inter Milan</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">0</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">77</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">38</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">77</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">4.6M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-pl"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Polish"></span><span class="semi-bold" data-bind="text: name">Dragowski</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">22</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->GK
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Fiorentina</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">0</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">75</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">37</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">75</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">3.8M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-br"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Brazilian"></span><span class="semi-bold" data-bind="text: name">João Pedro</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">23</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->Def
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Bahia</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">34</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">65</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">49</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">65</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">3.3M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-scl"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Scottish"></span><span class="semi-bold" data-bind="text: name">Stewart G.</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">30</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->Fwd
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Rangers</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">66</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">15</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">40</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">66</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">3.2M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-ru"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Russian"></span><span class="semi-bold" data-bind="text: name">Maksimenko</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">22</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->GK
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Spartak Moscow</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">0</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">74</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">37</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">74</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">3.1M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-cm"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Cameroonian"></span><span class="semi-bold" data-bind="text: name">Brice</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">22</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->Mid
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam --> <a class="semi-bold ellipsis"
+                            data-bind="text: name, click: navigateTo, clickBubble: false">Granada</a>
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam -->
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">65</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">63</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">64</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">64</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">3.1M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-mk"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="North Macedonian"></span><span class="semi-bold" data-bind="text: name">Dimitrievski</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">26</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->GK
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Rayo Vallecano</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">0</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">70</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">35</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">70</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">2.8M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-kr"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="South Korean"></span><span class="semi-bold" data-bind="text: name">Han Guk-yeong</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">30</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->Mid
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Gangwon FC</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">62</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">70</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">66</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">66</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">2.3M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-br"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Brazilian"></span><span class="semi-bold" data-bind="text: name">Grohe</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">33</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->GK
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Al-Ittihad</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">0</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">71</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">35</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">71</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">2.3M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-ma"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Moroccan"></span><span class="semi-bold" data-bind="text: name">Tagnaouti</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">24</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->GK
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Wydad Casablanca</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">0</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">67</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">33</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">67</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">2.0M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-zm"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Zambian"></span><span class="semi-bold" data-bind="text: name">Mweene</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">35</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->GK
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Mamelodi Sundowns</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">0</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">64</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">32</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">64</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">1.1M</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+
+        <tr class="clickable player-table-row no-world-star"
+            data-bind="click: $parents[2].showBuyPlayerModal.bind($parents[2]), css: { 'in-form-table-row': playerPartial() &amp;&amp; playerPartial().isInForm(), 'legend-table-row': playerPartial() &amp;&amp; playerPartial().isLegend(), 'world-star-table-row': playerPartial() &amp;&amp; playerPartial().isWorldStar(), highlight: teamPartial() != null &amp;&amp; teamPartial().isSessionTeam() }, secondCss: playerPartial().getWorldStarClassName()"
+            data-buyplayercontent="Age">
+            <!-- ko with: playerPartial -->
+            <td class="vertical-center">
+                <span class="flag-icon hidden-xs flag-icon-gr"
+                    data-bind="css: 'flag-icon-' + (nationality ? nationality.code.toLowerCase() : 'none'), attr: { title: (nationality ? nationality.name : '') }"
+                    title="Greek"></span><span class="semi-bold" data-bind="text: name">Garavelis</span>
+                <!-- ko if: isLegend() -->
+                <!-- /ko -->
+                <!-- ko if: isInForm() -->
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs" data-bind="text: age">27</td>
+            <!-- ko if: !$parents[2].sortTransferPlayersByLine() -->
+            <td class="td-content-width">
+                <!-- ko if: position === PlayerPosition.A -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.M -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.D -->
+                <!-- /ko -->
+                <!-- ko if: position === PlayerPosition.G -->GK
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="hidden-xs td-max-width">
+                <!-- ko with: teamPartial() -->
+                <div class="row row-h-xs-24 no-margin overflow-hidden">
+                    <!-- ko if: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: (appViewModel.leaguePartial() && appViewModel.leaguePartial().mode === LeagueMode.WinnersLeague) && managerPartial() && managerPartial().id !== 0 -->
+                    <div class="team-name col-h-xs-24 col-xs-12 vertical-center">
+                        <!-- ko if: true === true && !isForeignTeam -->
+                        <!-- /ko -->
+                        <!-- ko if: true === false || isForeignTeam --> <span class="semi-bold ellipsis"
+                            data-bind="text: name">Volos</span>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statAtt, css: { 'semi-bold': isAttacker }">0</td>
+            <td class="hidden-xs td-content-width text-center semi-bold"
+                data-bind="text: statDef, css: { 'semi-bold': (isGoalKeeper || isDefender) }">59</td>
+            <td class="hidden-xs td-content-width text-center"
+                data-bind="text: statOvr, css: { 'semi-bold': isMidfielder  }">29</td>
+            <td class="td-content-width text-center visible-xs" data-bind="text: statMain">59</td>
+            <!-- /ko -->
+            <td class="td-price">
+                <bdi>
+                    <!-- ko if: price > 0 || false -->
+                    <span class="text-nowrap rtl-force">
+                        <span class="icon-clubfunds-small"></span>
+                        <span data-bind="currency: price, roundCurrency: 1, fractionDigits: 1">905K</span>
+                    </span>
+                    <!-- /ko -->
+                </bdi>
+
+            </td>
+        </tr>
+    </tbody>
+</table>

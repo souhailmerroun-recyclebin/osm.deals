@@ -1,0 +1,21 @@
+{
+  "name": "osm.deals",
+  "version": "1.0",
+  "description": "Trade players, make big bucks!",
+  "manifest_version": 2,
+  "permissions": [
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://en.onlinesoccermanager.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "bootstrap.js",
+        "contentScript.js"
+      ]
+    }
+  ]
+}
